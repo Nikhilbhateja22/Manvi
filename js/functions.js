@@ -1,4 +1,3 @@
-﻿
 var $window = $(window), gardenCtx, gardenCanvas, $garden, garden;
 var clientWidth = $(window).width();
 var clientHeight = $(window).height();
@@ -131,25 +130,48 @@ function adjustCodePosition() {
 	$('#code').css("margin-top", ($("#garden").height() - $("#code").height()) / 2);
 }
 
-
+// MODIFIED: Removed autoplay from this function
 function showPhotosAndPlaySong() {
     document.getElementById('photoModal').style.display = 'flex';
-    var song = document.getElementById('loveSong');
-    song.play();
+    // Removed autoplay - user now controls with audio button
 }
 
-// Optional: close modal
+// MODIFIED: Added audio button reset functionality
 function closeModal() {
     document.getElementById('photoModal').style.display = 'none';
     var song = document.getElementById('loveSong');
+    var button = document.getElementById('audioButton');
     song.pause();
     song.currentTime = 0;
+    // Reset button to play state
+    button.innerHTML = '<i class="fas fa-play"></i>';
+    button.classList.remove('playing');
 }
 
+// NEW: Audio button toggle functionality
+function toggleAudio() {
+    var song = document.getElementById('loveSong');
+    var button = document.getElementById('audioButton');
+    
+    if (song.paused) {
+        song.play().then(() => {
+            button.innerHTML = '<i class="fas fa-pause"></i>';
+            button.classList.add('playing');
+        }).catch(e => {
+            console.log('Audio play failed:', e);
+            button.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        });
+    } else {
+        song.pause();
+        button.innerHTML = '<i class="fas fa-play"></i>';
+        button.classList.remove('playing');
+    }
+}
 
 function showLoveU() {
 	$('#loveu').fadeIn(3000);
 }
+
 function createFloatingHearts() {
     setInterval(() => {
         const heart = document.createElement('div');
@@ -171,7 +193,7 @@ function createFloatingHearts() {
                 heart.remove();
             }
         }, 7000);
-    }, 1200); // Reduced from 2000ms to 1200ms for more frequent hearts
+    }, 1100); // Reduced from 2000ms to 1200ms for more frequent hearts
 }
 
 // Start when page loads
