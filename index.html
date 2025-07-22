@@ -4,18 +4,10 @@
 <script src="https://kit.fontawesome.com/a14ae32021.js" crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>This one is for my Mannu</title>
-
-<style type="text/css">
-@font-face {
-	font-family: digit;
-	src: url('digital-7_mono.ttf') format("truetype");
-}
-</style>
 <link href="css/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/garden.js"></script>
 <script type="text/javascript" src="js/functions.js"></script>
-
 </head>
 
 <body>
@@ -32,9 +24,9 @@
 		Since that moment, something clicked deep inside me;<br />
 		<span class="comments">// Your laugh, your talks, your vibe</span><br />
 		Every little thing about you got written into my code;<br />
-		Like your love for Shri Krishna 🌼<br />
+		Like your love for Kanhu Ji 🌼<br />
 		Your Bollywood dance moves that light up any space 🕺<br />
-		Even how you handle mirchi like it’s a final boss 😅<br />
+		Even how you handle mirchi like it's a final boss 😅<br />
 		<span class="comments">// And still look like a literal angel doing it</span><br />
 		<br>
 		And every single day…<br />
@@ -45,11 +37,11 @@
 		Whatever you wear, you look like the main character — always ✨<br />
 		That yellow you love? It reminds me of how warm you make my world feel 🌞<br />
 		<br>
-		You don’t even have to try —<br />
+		You don't even have to try —<br />
 		Your presence itself is sukoon;<br />
 		And your absence? Always tooooooooooooooo loud.<br />
 		<br>
-		My calm, my chaos, my heart’s favorite person.<br />
+		My calm, my chaos, my heart's favorite person.<br />
 		<span class="comments">// No expiry. No end. Just more, every day.</span><br />
 		<br>
 		 
@@ -57,7 +49,6 @@
 			<br>
 			<span id="heartspan">
 			<a href="javascript:void(0);" onclick="showPhotosAndPlaySong()"><i class="fas fa-heart" id="icon"></i></a>
-
 			</span>
 		</div>
 		<div id="loveHeart">
@@ -75,6 +66,22 @@
 		</div>
 	</div>
 </div>
+
+<!-- Modal with music button on image -->
+<div id="photoModal">
+    <div style="position:relative; display:inline-block;">
+        <img src="image.jpg" id="modalImg1" />
+        <button id="audioButton" onclick="toggleAudio()">
+            <i class="fas fa-play"></i>
+        </button>
+    </div>
+    <button onclick="closeModal()">
+        Close
+    </button>
+</div>
+
+<!-- Audio element -->
+<audio id="loveSong" src="tumho.mp3"></audio>
 
 <script type="text/javascript">
 var offsetX = $("#loveHeart").width() / 2;
@@ -108,23 +115,36 @@ if (!document.createElement('canvas').getContext) {
 	adjustCodePosition();
 	$("#code").typewriter();
 }
+
+// Modal functions
+function showPhotosAndPlaySong() {
+    document.getElementById('photoModal').classList.add('show');
+}
+
+function closeModal() {
+    document.getElementById('photoModal').classList.remove('show');
+    const audio = document.getElementById('loveSong');
+    audio.pause();
+    audio.currentTime = 0;
+    document.getElementById('audioButton').innerHTML = '<i class="fas fa-play"></i>';
+    document.getElementById('audioButton').classList.remove('playing');
+}
+
+function toggleAudio() {
+    const audio = document.getElementById('loveSong');
+    const button = document.getElementById('audioButton');
+    
+    if (audio.paused) {
+        audio.play();
+        button.innerHTML = '<i class="fas fa-pause"></i>';
+        button.classList.add('playing');
+    } else {
+        audio.pause();
+        button.innerHTML = '<i class="fas fa-play"></i>';
+        button.classList.remove('playing');
+    }
+}
 </script>
-
-<!-- Modal with music button on image -->
-<div id="photoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center; flex-direction:column;">
-    <div style="position:relative; display:inline-block;">
-        <img src="image.jpg" id="modalImg1" style="max-width:90%; max-height:70%; margin:10px; border-radius:15px; box-shadow:0 0 20px rgba(255,255,255,0.5);" />
-        <button id="audioButton" onclick="toggleAudio()" style="position:absolute; top:15px; left:15px; background:none; border:none; cursor:pointer;">
-            <i class="fas fa-play" style="font-size:40px; color:#ff69b4; text-shadow:0 0 10px rgba(255,255,255,0.8);"></i>
-        </button>
-    </div>
-    <button onclick="closeModal()" style="margin-top:20px; padding:10px 20px; font-size:18px; background:#fff; border:none; border-radius:10px; cursor:pointer;">
-        Close
-    </button>
-</div>
-
-<!-- Audio element -->
-<audio id="loveSong" src="tumho.mp3"></audio>
 
 </body>
 </html>
